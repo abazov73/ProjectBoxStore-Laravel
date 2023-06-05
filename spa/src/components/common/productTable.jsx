@@ -24,7 +24,7 @@ export default function CustomerTable(props){
 
     function saveItem() {
         let product = {
-            productName: props.data.productName
+            product_name: props.data.product_name
         }
         if (!isEdit) {
             DataService.create(props.url, product).then(() => loadItems());

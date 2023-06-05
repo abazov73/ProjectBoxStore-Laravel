@@ -3,12 +3,12 @@ import ProductTable from '../common/productTable'
 import { useState, useEffect} from "react";
 
 export default function ProductPage(){
-    const url = 'product';
+    const url = 'product/';
     const getUrl = 'product/';
     const transformer = (data) => new Product(data);
     const catalogProductHeaders = [
-        { name: 'productName', label: 'Название товара' },
-        { name: 'storeName', label: 'Название магазина' }
+        { name: 'product_name', label: 'Название товара' },
+        { name: 'store_name', label: 'Название магазина' }
     ];
 
     const [data, setData] = useState(new Product());
@@ -35,8 +35,8 @@ export default function ProductPage(){
             onAdd={handleOnAdd}
             onEdit={handleOnEdit}>
         <div className="col-md-4">
-            <label className="form-label" forhtml="productName">Название</label>
-            <input className="form-control" type="text" id="productName" value={data.lastName} onChange={handleFormChange} required="required"/>
+            <label className="form-label" forhtml="product_name">Название</label>
+            <input className="form-control" type="text" id="product_name" value={data.product_name} onChange={handleFormChange} required="required"/>
         </div>
         </ProductTable>
       </article>

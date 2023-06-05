@@ -1,7 +1,7 @@
 export default class Product {
     constructor(data) {
         this.id = data?.id;
-        this.productName = data?.productName || '';
-        this.storeName = data?.storeName || '';
+        this.product_name = data?.product_name || '';
+        this.store_name = data?.store_name || '';
     }
 }

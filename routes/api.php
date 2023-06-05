@@ -91,3 +91,31 @@ Route::prefix('store')->group(function(){
         DB::table('stores')->where('id', $id)->delete();
     });
 });
+
+Route::prefix('product')->group(function (){
+    Route::get('/', function(){
+        $products = DB::table('products')->get();
+        return $products;
+    });
+
+    Route::get('/{id}', function (int $id){
+        $product = DB::table('products')->find($id);
+        return $product;
+    });
+    
+    Route::post('/', function (Request $request){
+        DB::table('products')->insertGetId([
+            'product_name' => $request->input('product_name')
+        ]);
+    });
+
+    Route::put('/{id}', function (Request $request, int $id){
+        DB::table('products')
+            ->where('id', $id)
+            ->update(['product_name' => $request->input('product_name')]);
+    });
+
+    Route::delete('/{id}', function (int $id){
+        DB::table('products')->where('id', $id)->delete();
+    });
+});
