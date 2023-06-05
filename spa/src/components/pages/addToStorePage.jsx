@@ -4,9 +4,9 @@ import DataService from '../../services/DataService';
 import { useState, useEffect} from "react";
 
 export default function AddToStorePage(){
-    const getStoreUrl = 'store';
+    const getStoreUrl = 'store/';
     const getProductUrl = 'product/getWithoutStores'
-    const url = 'store/'
+    const url = 'product/'
     const [storeOptions, setStoreOptions] = useState([])
     const [productOptions, setProductOptions] = useState([])
     const transformerProduct = (data) => new Product(data);
@@ -20,11 +20,11 @@ export default function AddToStorePage(){
     }
 
     function loadSelOptions(dataStore, dataProduct){
+        console.log("stores: " + dataStore);
         const results1 = [];
-        //console.log(dataProduct);
         dataStore.forEach((value) => {
             results1.push({
-                key: value.storeName,
+                key: value.store_name,
                 value: value.id,
             })
         })
@@ -34,20 +34,20 @@ export default function AddToStorePage(){
         console.log(dataProduct);
         dataProduct.forEach((value) => {
             results2.push({
-                key: value.productName,
+                key: value.product_name,
                 value: value.id,
             })
         })
         setProductOptions(results2);
     }
 
-    function add(){
+    async function add(){
         var storeId = document.getElementById("storeId").value;
         var productId = document.getElementById("productId").value;
-        let product = {
-            id: productId
+        let store = {
+            id: storeId
         }
-        DataService.update(url + storeId + "/add", product);
+        await DataService.update(url + "deliver/" + productId, store);
         window.location.replace("/product");
     }
 

@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Store;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
@@ -75,8 +76,6 @@ Route::prefix('store')->group(function(){
     });
 
     Route::put('/{id}', function(Request $request, int $id){
-        // $name = $request->input('store_name');
-        // error_log($name);
         try{
         DB::table('stores')
         ->where('id', $id)
@@ -95,18 +94,36 @@ Route::prefix('store')->group(function(){
 Route::prefix('product')->group(function (){
     Route::get('/', function(){
         $products = DB::table('products')->get();
+        foreach ($products as $product){
+            if ($product->store_id != null) $product->store_name = Store::find($product->store_id)->store_name;
+        }
         return $products;
+    });
+
+    Route::get('/getWithoutStores', function (){
+        try{
+            $products = DB::table('products')->whereNull('store_id')->get();
+            return $products;
+        }
+        catch (Throwable $e){
+            error_log($e);
+        }
     });
 
     Route::get('/{id}', function (int $id){
         $product = DB::table('products')->find($id);
         return $product;
     });
-    
+
     Route::post('/', function (Request $request){
         DB::table('products')->insertGetId([
             'product_name' => $request->input('product_name')
         ]);
+    });
+
+    Route::put('/deliver/{id}', function(Request $request, int $id){
+        error_log('deliver');
+        DB::table('products')->where('id', $id)->update(['store_id' => $request->input('id')]);
     });
 
     Route::put('/{id}', function (Request $request, int $id){

@@ -17,7 +17,6 @@ export default class DataService {
 
     static async readAll(url, transformer) {
         const response = await axios.get(this.dataUrlPrefix + url);
-        console.log(response);
         return response.data.map(item => transformer(item));
     }
 
@@ -33,6 +32,7 @@ export default class DataService {
 
     static async update(url, data) {
         const response = await axios.put(this.dataUrlPrefix + url, data);
+        console.log('update ok')
         return true;
     }
 
