@@ -3,11 +3,11 @@ import StoreTable from '../common/storeTable'
 import { useState, useEffect} from "react";
 
 export default function StorePage(){
-    const url = 'store';
+    const url = 'store/';
     const getUrl = 'store/';
     const transformer = (data) => new Store(data);
     const catalogStoreHeaders = [
-        { name: 'storeName', label: 'Название магазина' }
+        { name: 'store_name', label: 'Название магазина' }
     ];
 
     const [data, setData] = useState(new Store());
@@ -34,8 +34,8 @@ export default function StorePage(){
             onAdd={handleOnAdd}
             onEdit={handleOnEdit}>
         <div className="col-md-4">
-            <label className="form-label" forhtml="storeName">Название</label>
-            <input className="form-control" type="text" id="storeName" value={data.lastName} onChange={handleFormChange} required="required"/>
+            <label className="form-label" forhtml="store_name">Название</label>
+            <input className="form-control" type="text" id="store_name" value={data.store_name} onChange={handleFormChange} required="required"/>
         </div>
         </StoreTable>
       </article>

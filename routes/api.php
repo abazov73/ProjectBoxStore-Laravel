@@ -57,3 +57,37 @@ Route::prefix('customer')->group(function (){
     });
 });
 
+Route::prefix('store')->group(function(){
+    Route::get('/', function(){
+        $stores = DB::table('stores')->get();
+        return $stores;
+    });
+
+    Route::get('/{id}', function(int $id){
+        $store = DB::table('stores')->find($id);
+        return ($store);
+    });
+
+    Route::post('/', function(Request $request){
+        DB::table('stores')->insertGetId([
+            'store_name' => $request->input("store_name")
+        ]);
+    });
+
+    Route::put('/{id}', function(Request $request, int $id){
+        // $name = $request->input('store_name');
+        // error_log($name);
+        try{
+        DB::table('stores')
+        ->where('id', $id)
+        ->update(['store_name' => $request->input('store_name')]);
+        }
+        catch (Throwable $e){
+            error_log($e);
+        }
+    });
+
+    Route::delete('/{id}', function(int $id){
+        DB::table('stores')->where('id', $id)->delete();
+    });
+});
