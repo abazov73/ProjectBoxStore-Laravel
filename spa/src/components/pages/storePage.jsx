@@ -33,7 +33,7 @@ export default function StorePage(){
             data={data}
             onAdd={handleOnAdd}
             onEdit={handleOnEdit}>
-        <div className="col-md-4">
+        <div className="col-ld-4">
             <label className="form-label" forhtml="store_name">Название</label>
             <input className="form-control" type="text" id="store_name" value={data.store_name} onChange={handleFormChange} required="required"/>
         </div>

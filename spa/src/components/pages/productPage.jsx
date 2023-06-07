@@ -34,7 +34,7 @@ export default function ProductPage(){
             data={data}
             onAdd={handleOnAdd}
             onEdit={handleOnEdit}>
-        <div className="col-md-4">
+        <div className="col-ld-4">
             <label className="form-label" forhtml="product_name">Название</label>
             <input className="form-control" type="text" id="product_name" value={data.product_name} onChange={handleFormChange} required="required"/>
         </div>

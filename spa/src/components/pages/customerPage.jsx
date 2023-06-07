@@ -35,15 +35,15 @@ export default function CustomerPage(){
             data={data}
             onAdd={handleOnAdd}
             onEdit={handleOnEdit}>
-        <div className="col-md-4">
+        <div className="col-ld-4">
             <label className="form-label" forhtml="last_name">Фамилия</label>
             <input className="form-control" type="text" id="last_name" value={data.last_name} onChange={handleFormChange} required="required"/>
           </div>
-          <div className="col-md-4">
+          <div className="col-ld-4">
             <label className="form-label" forhtml="first_name">Имя</label> 
             <input className="form-control" type="text" id="first_name" value={data.first_name} onChange={handleFormChange} required="required"/>
           </div>
-          <div className="col-md-4">
+          <div className="col-ld-4">
             <label className="form-label" forhtml="middle_name">Отчество</label>
             <input className="form-control" type="text" id="middle_name" value={data.middle_name} onChange={handleFormChange} required="required"/>
           </div>

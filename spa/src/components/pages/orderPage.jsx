@@ -72,7 +72,7 @@ export default function OrderPage(){
             onAdd={handleOnAdd}
             loadOptions={loadOptions}
             onEdit={handleOnEdit}>
-        <div className="col-md-4">
+        <div className="col-ld-4">
             <label className="form-label" forhtml="customer_id">Покупатель</label>
             <select className="form-select" id="customer_id" value={data.customer_id} onChange={handleFormChange} required>
                 {
