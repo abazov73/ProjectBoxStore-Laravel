@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Customer;
+use App\Models\Product;
 use App\Models\Store;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -110,6 +112,16 @@ Route::prefix('product')->group(function (){
         }
     });
 
+    Route::get('/getWithStores', function (){
+        try{
+            $products = DB::table('products')->whereNotNull('store_id')->get();
+            return $products;
+        }
+        catch (Throwable $e){
+            error_log($e);
+        }
+    });
+
     Route::get('/{id}', function (int $id){
         $product = DB::table('products')->find($id);
         return $product;
@@ -134,5 +146,37 @@ Route::prefix('product')->group(function (){
 
     Route::delete('/{id}', function (int $id){
         DB::table('products')->where('id', $id)->delete();
+    });
+});
+
+Route::prefix('order')->group(function(){
+    Route::get('/', function(){
+        $orders = DB::table('ordereds')->get();
+        foreach ($orders as $order){
+            $product = Product::find($order->product_id);
+            $customer = Customer::find($order->customer_id);
+            $order->product_name = $product->product_name;
+            $order->customer_fio = $customer->last_name . ' ' . $customer->first_name . ' ' . $customer->middle_name;
+            $order->store_name = Store::find($product->store_id)->store_name;
+        }
+        return $orders;
+    });
+
+    Route::get('/{id}', function(int $id){
+        $order = DB::table('ordereds')->find($id);
+        return $order;
+    });
+
+    Route::post('/', function(Request $request){
+        try{
+        DB::table('ordereds')->insertGetId([
+            'quantity' => $request->input('quantity'),
+            'product_id' => $request->input('product_id'),
+            'customer_id' => $request->input('customer_id')
+        ]);
+        }
+        catch (Throwable $e){
+            error_log($e);
+        }
     });
 });

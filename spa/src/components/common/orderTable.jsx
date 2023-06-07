@@ -29,15 +29,11 @@ export default function CustomerTable(props){
 
     function saveItem() {
         let ordered = {
-            productId: props.data.productId,
-            customerId: props.data.customerId,
+            product_id: props.data.product_id,
+            customer_id: props.data.customer_id,
             quantity: props.data.quantity
         }
-        if (!isEdit) {
-            DataService.create(props.url, ordered).then(() => loadItems());
-        } else {
-            DataService.update(props.getUrl + props.data.id, ordered).then(() => loadItems());
-        }
+        DataService.create(props.url, ordered).then(() => loadItems());
     }
 
     function handleAdd() {
@@ -105,7 +101,7 @@ export default function CustomerTable(props){
             <Table 
                 headers={props.headers} 
                 items={items}
-                selectable={true}
+                selectable={false}
                 onClick={handleTableClick}
                 onDblClick={handleTableDblClick}/>
             <Modal 

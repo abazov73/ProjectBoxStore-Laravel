@@ -1,8 +1,11 @@
-export default class Store {
+export default class Order {
     constructor(data) {
         this.id = data?.id;
-        this.storeName = data?.storeName || '';
-        this.customerFIO = data?.customerFIO || '';
-        this.productName = data?.productName || '';
+        this.store_name = data?.store_name || '';
+        this.customer_fio = data?.customer_fio || '';
+        this.customer_id = data?.customer_fio || '';
+        this.product_name = data?.product_name || '';
+        this.product_id = data?.product_id || '';
+        this.quantity = data?.quantity || '';
     }
 }

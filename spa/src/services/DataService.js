@@ -27,6 +27,7 @@ export default class DataService {
 
     static async create(url, data) {
         const response = await axios.post(this.dataUrlPrefix + url, data);
+        console.log(response);
         return true;
     }
 

@@ -5,17 +5,17 @@ import OrderTable from '../common/orderTable'
 import { useState, useEffect} from "react";
 
 export default function OrderPage(){
-    const url = 'order';
+    const url = 'order/';
     const getUrl = 'order/';
-    const getCustomerUrl = 'customer';
+    const getCustomerUrl = 'customer/';
     const getProductUrl = 'product/getWithStores'
     const transformer = (data) => new Order(data);
     const transformerProduct = (data) => new Product(data);
     const transformerCustomer = (data) => new Customer(data); 
     const catalogOrderHeaders = [
-        { name: 'customerFIO', label: 'ФИО покупателя' },
-        { name: 'storeName', label: 'Магазина'},
-        { name: 'productName', label: 'Товар'}
+        { name: 'customer_fio', label: 'ФИО покупателя' },
+        { name: 'store_name', label: 'Магазина'},
+        { name: 'product_name', label: 'Товар'}
     ];
 
     const [data, setData] = useState(new Order());
@@ -28,7 +28,7 @@ export default function OrderPage(){
         //console.log(dataProduct);
         dataCustomer.forEach((value) => {
             results1.push({
-                key: value.lastName + " " + value.firstName + " " + value.middleName,
+                key: value.last_name + " " + value.first_name + " " + value.middle_name,
                 value: value.id,
             })
         })
@@ -37,7 +37,7 @@ export default function OrderPage(){
         const results2 = [];
         dataProduct.forEach((value) => {
             results2.push({
-                key: value.productName,
+                key: value.product_name,
                 value: value.id,
             })
         })
@@ -73,8 +73,8 @@ export default function OrderPage(){
             loadOptions={loadOptions}
             onEdit={handleOnEdit}>
         <div className="col-md-4">
-            <label className="form-label" forhtml="customerId">Покупатель</label>
-            <select className="form-select" id="customerId" value={data.customerId} onChange={handleFormChange} required>
+            <label className="form-label" forhtml="customer_id">Покупатель</label>
+            <select className="form-select" id="customer_id" value={data.customer_id} onChange={handleFormChange} required>
                 {
                     customerOptions.map((option) => {
                         return(
@@ -86,8 +86,8 @@ export default function OrderPage(){
                     )
                 }
             </select>
-            <label className="form-label" forhtml="productId">Продукт</label>
-            <select className="form-select" id="productId" value={data.customerId} onChange={handleFormChange} required>
+            <label className="form-label" forhtml="product_id">Продукт</label>
+            <select className="form-select" id="product_id" value={data.product_id} onChange={handleFormChange} required>
                 {
                     productOptions.map((option) => {
                         return(
